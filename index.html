@@ -4,397 +4,209 @@
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
 <meta name="color-scheme" content="dark" />
-<title>TechnoFormer – AI Tools, Gadgets, Apps &amp; Tech News</title>
-<meta name="description" content="TechnoFormer — AI tools, gadgets, apps aur tech news. Paid tools FREE me kaise use karein, honest reviews aur latest tech updates." />
-<meta name="keywords" content="technoformer, techno former, AI tools free, tech news hindi, gadget reviews, free AI video" />
+<title>TechnoFormer – Paid Tools FREE Me Kaise? AI Tricks, Tutorials & Tech News</title>
+<meta name="description" content="TechnoFormer — paid AI tools FREE me kaise use karein? Grok, Muse AI, free AI video/image generators, honest tutorials aur latest tech news. Explore • Learn • Stay Ahead." />
+<meta name="keywords" content="technoformer, free ai tools, grok imagine free, claude ai free, ai video generator free, tech news hindi" />
 <meta name="author" content="TechnoFormer" />
 <meta name="robots" content="index, follow" />
 <link rel="icon" type="image/jpeg" href="assets/logo.jpg" />
 <link rel="apple-touch-icon" href="assets/logo.jpg" />
-<!-- Open Graph -->
 <meta property="og:type" content="website" />
 <meta property="og:site_name" content="TechnoFormer" />
-<meta property="og:title" content="TechnoFormer – AI Tools, Gadgets, Apps & Tech News" />
-<meta property="og:description" content="TechnoFormer — AI tools, gadgets, apps aur tech news. Paid tools FREE me kaise use karein, honest reviews aur latest tech updates." />
-<meta property="og:image" content="assets/logo.jpg" />
+<meta property="og:title" content="TechnoFormer – Paid Tools FREE Me Kaise?" />
+<meta property="og:description" content="AI tools, free tricks, tutorials aur tech news — sab kuch free me kaise? Sirf TechnoFormer par." />
+<meta property="og:image" content="assets/banner.jpg" />
 <meta property="og:locale" content="hi_IN" />
-<!-- Twitter -->
 <meta name="twitter:card" content="summary_large_image" />
-<meta name="twitter:title" content="TechnoFormer – AI Tools, Gadgets, Apps & Tech News" />
-<meta name="twitter:description" content="AI + New Tech + Tech Info — Explore • Learn • Stay Ahead. Paid tools FREE me kaise use karein, sirf TechnoFormer par." />
-<meta name="twitter:image" content="assets/logo.jpg" />
+<meta name="twitter:title" content="TechnoFormer – Paid Tools FREE Me Kaise?" />
+<meta name="twitter:description" content="AI + New Tech + Tech Info — Explore • Learn • Stay Ahead." />
+<meta name="twitter:image" content="assets/banner.jpg" />
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 <link href="https://fonts.googleapis.com/css2?family=Oxanium:wght@500;600;700;800&family=Hind:wght@400;500;600;700&display=swap" rel="stylesheet" />
-<style>
-:root{
-  --bg:#050b16;
-  --bg2:#081426;
-  --card:#0a1a30;
-  --card2:#0d213d;
-  --cyan:#00e5ff;
-  --cyan-dim:#00b8d4;
-  --cyan-soft:rgba(0,229,255,.12);
-  --text:#f2f7fb;
-  --muted:#a8bdd1;
-  --muted2:#7d95ad;
-  --border:rgba(0,229,255,.22);
-  --border-soft:rgba(255,255,255,.08);
-  --red:#ff0033;
-  --radius:16px;
-}
-*{box-sizing:border-box}
-html{scroll-behavior:smooth}
-body{margin:0;background:var(--bg);color:var(--text);font-family:"Hind",system-ui,-apple-system,Segoe UI,Roboto,sans-serif;line-height:1.6;-webkit-font-smoothing:antialiased;overflow-x:hidden}
-img{max-width:100%;display:block}
-a{color:inherit}
-h1,h2,h3,.display{font-family:"Oxanium",system-ui,sans-serif;letter-spacing:.02em;line-height:1.15;margin:0}
-.wrap{width:min(1120px,100% - 32px);margin-inline:auto}
-section{padding:56px 0}
-.section-head{margin-bottom:24px}
-.section-head h2{font-size:clamp(24px,4.5vw,34px);font-weight:800;text-transform:uppercase}
-.section-head h2 span{color:var(--cyan)}
-.section-head p{color:var(--muted);margin:8px 0 0;font-size:16px;max-width:640px}
-.kicker{font-family:"Oxanium",sans-serif;font-size:12px;font-weight:700;letter-spacing:.22em;text-transform:uppercase;color:var(--cyan);margin:0 0 10px}
-
-/* NAV */
-.nav{position:sticky;top:0;z-index:50;background:rgba(5,11,22,.92);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);border-bottom:1px solid var(--border-soft)}
-.nav-in{display:flex;align-items:center;gap:10px;padding:10px 0;flex-wrap:wrap}
-.brand{display:flex;align-items:center;gap:10px;text-decoration:none;flex-shrink:0}
-.brand img{width:42px;height:42px;border-radius:50%;border:2px solid var(--cyan);object-fit:cover}
-.brand-name{font-family:"Oxanium",sans-serif;font-weight:800;font-size:19px;letter-spacing:.04em}
-.brand-name em{font-style:normal;color:var(--cyan)}
-.nav-links{display:flex;gap:2px;flex-wrap:wrap;justify-content:center;width:100%;order:3}
-.nav-links a{text-decoration:none;font-weight:600;font-size:15px;color:var(--muted);padding:8px 11px;border-radius:999px;white-space:nowrap}
-.nav-links a:hover{color:var(--text);background:var(--cyan-soft)}
-.nav-cta{text-decoration:none;background:var(--red);color:#fff;font-weight:700;font-size:14px;padding:9px 16px;border-radius:999px;white-space:nowrap;margin-left:auto}
-@media(min-width:760px){
-  .nav-in{flex-wrap:nowrap}
-  .nav-links{width:auto;order:0;margin-left:auto;flex-wrap:nowrap;justify-content:flex-start}
-  .nav-cta{margin-left:8px}
-}
-@media(max-width:420px){
-  .brand-name{font-size:16px}
-  .brand img{width:36px;height:36px}
-  .nav-cta{padding:8px 13px;font-size:13px}
-  .nav-links a{padding:7px 9px;font-size:14px}
-}
-
-/* HERO */
-.hero{position:relative;padding:0;overflow:hidden;border-bottom:1px solid var(--border-soft)}
-.hero-bg{position:absolute;inset:0}
-.hero-bg img{width:100%;height:100%;object-fit:cover;opacity:.38}
-.hero-bg::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(5,11,22,.55) 0%,rgba(5,11,22,.82) 62%,var(--bg) 100%)}
-.hero-in{position:relative;z-index:1;text-align:center;padding:56px 0 64px}
-.hero-logo{width:118px;height:118px;border-radius:50%;margin:0 auto 18px;border:3px solid var(--cyan);object-fit:cover;box-shadow:0 0 0 6px rgba(0,229,255,.12),0 18px 50px rgba(0,0,0,.55)}
-.hero h1{font-size:clamp(38px,9vw,72px);font-weight:800;text-transform:uppercase}
-.hero h1 span{color:var(--cyan)}
-.hero-tag{font-family:"Oxanium",sans-serif;font-size:clamp(16px,3.4vw,22px);font-weight:600;color:#d9f7ff;margin:12px 0 4px;letter-spacing:.06em}
-.hero-sub{color:var(--cyan);font-weight:700;letter-spacing:.28em;font-size:12px;text-transform:uppercase;margin:0}
-.hero-desc{color:var(--muted);max-width:560px;margin:18px auto 0;font-size:16.5px}
-.hero-desc strong{color:var(--text)}
-.hero-btns{display:flex;flex-wrap:wrap;gap:12px;justify-content:center;margin-top:28px}
-.btn{display:inline-flex;align-items:center;gap:9px;text-decoration:none;font-weight:700;font-size:16px;padding:14px 24px;border-radius:12px;border:1px solid transparent;transition:transform .15s ease,box-shadow .15s ease}
-.btn:active{transform:scale(.98)}
-.btn-red{background:var(--red);color:#fff;box-shadow:0 10px 30px rgba(255,0,51,.28)}
-.btn-ghost{background:rgba(5,11,22,.6);border-color:var(--border);color:var(--text)}
-.btn-ghost:hover{border-color:var(--cyan);color:var(--cyan)}
-.hero-stats{display:flex;flex-wrap:wrap;gap:10px;justify-content:center;margin-top:30px}
-.chip{border:1px solid var(--border-soft);background:rgba(10,26,48,.75);border-radius:999px;padding:7px 14px;font-size:13.5px;font-weight:600;color:var(--muted)}
-.chip b{color:var(--cyan);font-family:"Oxanium",sans-serif}
-
-/* QUICK LINKS */
-.quick-grid{display:grid;grid-template-columns:1fr;gap:14px}
-@media(min-width:640px){.quick-grid{grid-template-columns:1fr 1fr}}
-.quick-card{display:flex;align-items:center;gap:16px;text-decoration:none;background:var(--card);border:1px solid var(--border-soft);border-radius:var(--radius);padding:18px}
-.quick-card:hover{border-color:var(--border)}
-.quick-ico{width:54px;height:54px;flex-shrink:0;border-radius:14px;display:grid;place-items:center;background:var(--cyan-soft);border:1px solid var(--border)}
-.quick-ico svg{width:27px;height:27px}
-.quick-card h3{font-size:18px;font-weight:700}
-.quick-card p{margin:2px 0 0;color:var(--muted);font-size:14.5px;line-height:1.45}
-.quick-arrow{margin-left:auto;color:var(--cyan);font-size:22px;font-weight:700;flex-shrink:0}
-
-/* VIDEO */
-.video-shell{background:var(--card);border:1px solid var(--border-soft);border-radius:20px;padding:14px}
-.video-frame{position:relative;width:100%;aspect-ratio:16/9;border-radius:12px;overflow:hidden;background:#000}
-.video-frame iframe{position:absolute;inset:0;width:100%;height:100%;border:0}
-.video-meta{padding:16px 6px 4px}
-.video-meta h3{font-size:clamp(18px,3.5vw,23px);font-weight:700;text-transform:none;letter-spacing:0;line-height:1.35}
-.video-meta p{color:var(--muted);margin:8px 0 0;font-size:15px}
-.badge{display:inline-block;background:var(--red);color:#fff;font-family:"Oxanium",sans-serif;font-size:11px;font-weight:700;letter-spacing:.16em;padding:4px 10px;border-radius:6px;text-transform:uppercase;margin-bottom:10px}
-.badge-cyan{background:var(--cyan);color:#03222b}
-.center-btn{text-align:center;margin-top:22px}
-.btn-cyan{background:var(--cyan);color:#03222b;box-shadow:0 10px 30px rgba(0,229,255,.2)}
-
-/* ABOUT */
-.about-grid{display:grid;grid-template-columns:1fr;gap:26px;align-items:center}
-@media(min-width:820px){.about-grid{grid-template-columns:340px 1fr;gap:40px}}
-.about-img{border-radius:20px;overflow:hidden;border:1px solid var(--border);max-width:420px;margin-inline:auto;width:100%}
-.about-img img{width:100%;height:100%;object-fit:cover;aspect-ratio:4/4.4}
-.about-text h2{font-size:clamp(24px,4.5vw,34px);font-weight:800;text-transform:uppercase}
-.about-text h2 span{color:var(--cyan)}
-.about-text p{color:var(--muted);font-size:16.5px;margin:14px 0 0}
-.about-text p strong{color:var(--text)}
-.about-points{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:22px}
-@media(max-width:480px){.about-points{grid-template-columns:1fr}}
-.point{background:var(--card);border:1px solid var(--border-soft);border-radius:12px;padding:14px 16px}
-.point h3{font-size:15px;font-weight:700;color:var(--cyan);text-transform:uppercase;letter-spacing:.05em}
-.point p{margin:4px 0 0;font-size:14px;color:var(--muted);line-height:1.5}
-
-/* NEWS */
-.news-grid{display:grid;grid-template-columns:1fr;gap:14px}
-@media(min-width:640px){.news-grid{grid-template-columns:1fr 1fr}}
-@media(min-width:980px){.news-grid{grid-template-columns:1fr 1fr 1fr}}
-.news-card{display:flex;flex-direction:column;background:var(--card);border:1px solid var(--border-soft);border-radius:var(--radius);padding:20px;text-decoration:none;transition:border-color .15s ease}
-.news-card:hover{border-color:var(--border)}
-.news-date{font-family:"Oxanium",sans-serif;font-size:12px;font-weight:700;letter-spacing:.14em;color:var(--cyan);text-transform:uppercase}
-.news-card h3{font-size:17.5px;font-weight:700;line-height:1.4;margin:10px 0 0;text-transform:none;letter-spacing:0}
-.news-card p{color:var(--muted);font-size:14.5px;margin:8px 0 0;line-height:1.55;flex:1}
-.news-src{margin-top:16px;font-size:13.5px;font-weight:700;color:var(--cyan)}
-.news-note{color:var(--muted2);font-size:13.5px;margin-top:16px;text-align:center}
-
-/* CTA BAND */
-.cta{background:var(--bg2);border-top:1px solid var(--border-soft);border-bottom:1px solid var(--border-soft);text-align:center}
-.cta h2{font-size:clamp(24px,5vw,36px);font-weight:800;text-transform:uppercase}
-.cta h2 span{color:var(--cyan)}
-.cta p{color:var(--muted);max-width:520px;margin:12px auto 0}
-.cta .hero-btns{margin-top:24px}
-
-/* FOOTER */
-footer{padding:36px 0 44px;text-align:center}
-footer img{width:56px;height:56px;border-radius:50%;border:2px solid var(--cyan);object-fit:cover;margin:0 auto 12px}
-footer .f-name{font-family:"Oxanium",sans-serif;font-weight:800;font-size:18px;letter-spacing:.05em}
-footer p{color:var(--muted2);font-size:14px;margin:6px 0 0}
-.social-row{display:flex;gap:10px;justify-content:center;margin-top:18px;flex-wrap:wrap}
-.social-row a{display:inline-flex;align-items:center;gap:8px;text-decoration:none;font-weight:700;font-size:14px;border:1px solid var(--border-soft);background:var(--card);padding:10px 18px;border-radius:999px}
-.social-row a:hover{border-color:var(--border);color:var(--cyan)}
-.social-row svg{width:18px;height:18px}
-
-.reveal{opacity:1;transform:none}
-@media(prefers-reduced-motion:reduce){
-  html{scroll-behavior:auto}
-  .btn{transition:none}
-}
-</style>
+<link rel="stylesheet" href="styles.css" />
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"WebSite","name":"TechnoFormer","url":"https://technoformer.example/","description":"Paid AI tools FREE me kaise? Tutorials, tricks aur tech news.","publisher":{"@type":"Organization","name":"TechnoFormer"}}
+</script>
 </head>
 <body>
 
-<!-- NAV -->
-<header class="nav">
+<nav class="nav">
   <div class="wrap nav-in">
-    <a class="brand" href="#home" aria-label="TechnoFormer home">
-      <img src="assets/logo.jpg" alt="TechnoFormer channel logo — anime tech creator with AI robot, laptop and gadgets" />
-      <span class="brand-name">TECHNO<em>FORMER</em></span>
-    </a>
-    <nav class="nav-links" aria-label="Main navigation">
-      <a href="#home">Home</a>
-      <a href="#videos">Videos</a>
-      <a href="#news">News</a>
-      <a href="#links">Links</a>
-      <a href="#about">About</a>
-    </nav>
-    <a class="nav-cta" href="https://www.youtube.com/@TechnoFormer" target="_blank" rel="noopener">Subscribe</a>
+    <a class="brand" href="index.html"><img src="assets/logo.jpg" alt="TechnoFormer logo" /><span class="brand-name">TECHNO<em>FORMER</em></span></a>
+    <div class="nav-links">
+      <a href="index.html" class="active">Home</a>
+      <a href="videos.html">Videos</a>
+      <a href="blog.html">Blog</a>
+      <a href="about.html">About</a>
+      <a href="contact.html">Contact</a>
+    </div>
+    <a class="nav-cta" href="https://www.youtube.com/@TechnoFormer" target="_blank" rel="noopener">▶ Subscribe</a>
+    <button class="hamburger" id="navToggle" aria-label="Menu">☰</button>
+  </div>
+  <div class="wrap mobile-menu" id="mobileMenu">
+    <a href="index.html" class="active">Home</a>
+    <a href="videos.html">Videos</a>
+    <a href="blog.html">Blog</a>
+    <a href="about.html">About</a>
+    <a href="contact.html">Contact</a>
+  </div>
+</nav>
+
+<header class="hero">
+  <div class="hero-bg"><img src="assets/banner.jpg" alt="" /></div>
+  <div class="wrap hero-in">
+    <img class="hero-logo" src="assets/logo.jpg" alt="TechnoFormer" />
+    <h1>TECHNO<span>FORMER</span></h1>
+    <p class="hero-tag">Paid Tools <span style="color:var(--cyan)">FREE</span> Me Kaise?</p>
+    <p class="hero-sub">Explore • Learn • Stay Ahead</p>
+    <p class="hero-desc">Jo tools <strong>paise</strong> me milte hain, unhe <strong>free me kaise</strong> use karein? AI video generators, AI image tools, account tricks — sab kuch step-by-step, <strong>no clickbait</strong>.</p>
+    <div class="hero-btns">
+      <a class="btn btn-red" href="https://www.youtube.com/@TechnoFormer" target="_blank" rel="noopener">▶ Watch on YouTube</a>
+      <a class="btn btn-ghost" href="videos.html">Latest Videos</a>
+      <a class="btn btn-ghost" href="blog.html">Read the Blog</a>
+    </div>
+    <div class="hero-stats">
+      <span class="chip"><b>AI</b> Tools & Tricks</span>
+      <span class="chip"><b>100%</b> Free Methods</span>
+      <span class="chip"><b>NEW</b> Videos Weekly</span>
+    </div>
   </div>
 </header>
 
-<!-- HERO -->
-<section class="hero" id="home">
-  <div class="hero-bg" aria-hidden="true"><img src="assets/banner.jpg" alt="" /></div>
-  <div class="wrap hero-in">
-    <img class="hero-logo" src="assets/logo.jpg" alt="TechnoFormer official logo — AI, gadgets, apps and websites" />
-    <h1>Techno<span>Former</span></h1>
-    <p class="hero-tag">AI + New Tech + Tech Info</p>
-    <p class="hero-sub">Explore • Learn • Stay Ahead</p>
-    <p class="hero-desc">Paid AI tools <strong>FREE me kaise</strong> use karein — secret tricks, honest gadget reviews aur latest tech news. Har video ek naya jugaad, har update ek step aage!</p>
-    <div class="hero-btns">
-      <a class="btn btn-red" href="https://www.youtube.com/@TechnoFormer" target="_blank" rel="noopener">▶ Subscribe on YouTube</a>
-      <a class="btn btn-ghost" href="#featured">Watch Latest Video ↓</a>
-    </div>
-    <div class="hero-stats" aria-label="Channel highlights">
-      <span class="chip"><b>AI TOOLS</b> &nbsp;Free Tricks</span>
-      <span class="chip"><b>GADGETS</b> &nbsp;Honest Reviews</span>
-      <span class="chip"><b>APPS</b> &nbsp;Hidden Gems</span>
-      <span class="chip"><b>NEWS</b> &nbsp;Latest Updates</span>
-    </div>
-  </div>
-</section>
-
-<!-- QUICK LINKS -->
-<section id="links">
-  <div class="wrap">
-    <div class="section-head reveal">
-      <p class="kicker">Sab Links Ek Jagah</p>
-      <h2>Quick <span>Links</span></h2>
-      <p>Linktree ki tension khatam — TechnoFormer ke saare important links yahi milenge. Bas tap karo aur seedha pahunch jao!</p>
-    </div>
-    <div class="quick-grid">
-      <a class="quick-card reveal" href="https://www.youtube.com/@TechnoFormer" target="_blank" rel="noopener">
-        <span class="quick-ico"><svg viewBox="0 0 24 24" fill="#ff0033" aria-hidden="true"><path d="M23 7.2s-.22-1.56-.9-2.24c-.86-.9-1.82-.9-2.26-.96C16.7 3.75 12 3.75 12 3.75s-4.7 0-7.84.25c-.44.06-1.4.06-2.26.96C1.22 5.64 1 7.2 1 7.2S.75 9.03.75 10.86v1.71C.75 14.4 1 16.23 1 16.23s.22 1.56.9 2.24c.86.9 1.99.87 2.5 1 1.8.17 7.6.25 7.6.25s4.71 0 7.85-.26c.44-.05 1.4-.05 2.26-.95.68-.68.9-2.25.9-2.25s.25-1.82.25-3.65v-1.71C23.25 9.03 23 7.2 23 7.2ZM9.75 15.02V8.4l6.27 3.32-6.27 3.3Z"/></svg></span>
-        <span><h3>YouTube Channel</h3><p>@TechnoFormer — saare videos, Shorts aur playlists</p></span>
-        <span class="quick-arrow" aria-hidden="true">→</span>
-      </a>
-      <a class="quick-card reveal" href="https://www.instagram.com/technoformer" target="_blank" rel="noopener">
-        <span class="quick-ico"><svg viewBox="0 0 24 24" fill="#00e5ff" aria-hidden="true"><path d="M12 2.2c3.2 0 3.58.01 4.85.07 3.25.15 4.77 1.7 4.92 4.92.06 1.27.07 1.65.07 4.85s-.01 3.58-.07 4.85c-.15 3.22-1.66 4.77-4.92 4.92-1.27.06-1.64.07-4.85.07s-3.58-.01-4.85-.07c-3.26-.15-4.77-1.7-4.92-4.92C2.21 15.58 2.2 15.2 2.2 12s.01-3.58.07-4.85C2.42 3.93 3.94 2.38 7.15 2.27 8.42 2.21 8.8 2.2 12 2.2Zm0 3.6a6.2 6.2 0 1 0 0 12.4 6.2 6.2 0 0 0 0-12.4Zm0 10.22a4.02 4.02 0 1 1 0-8.04 4.02 4.02 0 0 1 0 8.04Zm6.4-11.85a1.45 1.45 0 1 0 0 2.9 1.45 1.45 0 0 0 0-2.9Z"/></svg></span>
-        <span><h3>Instagram</h3><p>@technoformer — daily reels, updates aur behind the scenes</p></span>
-        <span class="quick-arrow" aria-hidden="true">→</span>
-      </a>
-      <a class="quick-card reveal" href="https://www.youtube.com/watch?v=3dDMkDV-YC8" target="_blank" rel="noopener">
-        <span class="quick-ico"><svg viewBox="0 0 24 24" fill="#00e5ff" aria-hidden="true"><path d="M8 5.5v13l11-6.5-11-6.5Z"/></svg></span>
-        <span><h3>Latest Video</h3><p>Grok Imagine UNLOCKED — Unlimited FREE AI Videos in 1080p</p></span>
-        <span class="quick-arrow" aria-hidden="true">→</span>
-      </a>
-      <a class="quick-card reveal" href="https://www.youtube.com/@TechnoFormer/videos" target="_blank" rel="noopener">
-        <span class="quick-ico"><svg viewBox="0 0 24 24" fill="#00e5ff" aria-hidden="true"><path d="M4 5h7v6H4V5Zm9 0h7v6h-7V5ZM4 13h7v6H4v-6Zm9 0h7v6h-7v-6Z"/></svg></span>
-        <span><h3>All Videos</h3><p>Channel ke saare uploads — AI tricks, reviews aur tutorials</p></span>
-        <span class="quick-arrow" aria-hidden="true">→</span>
-      </a>
-    </div>
-  </div>
-</section>
-
+<main>
 <!-- FEATURED VIDEO -->
-<section id="featured" style="padding-top:8px">
+<section>
   <div class="wrap">
     <div class="section-head reveal">
-      <p class="kicker">Featured Video</p>
-      <h2>Latest <span>Dhamaka</span> 🔥</h2>
-      <p>Sabse naya video — Grok Imagine ka full free trick, step-by-step Hindi me samjhaya gaya hai.</p>
+      <p class="kicker">Featured</p>
+      <h2>Latest <span>Video</span></h2>
+      <p>Unlimited AI images + 10-second videos — bilkul FREE. Full tutorial YouTube par.</p>
     </div>
     <div class="video-shell reveal">
       <div class="video-frame">
-        <iframe src="https://www.youtube.com/embed/3dDMkDV-YC8" title="Grok Imagine UNLOCKED — Unlimited 15-Second AI Videos in 1080p FREE | TechnoFormer" loading="lazy" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen referrerpolicy="strict-origin-when-cross-origin"></iframe>
+        <iframe src="https://www.youtube.com/embed/3CsKTmL4bJo" title="Unlimited AI Images + 10-Second Videos for FREE" loading="lazy" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
       </div>
-      <div class="video-meta">
-        <span class="badge">New Video</span>
-        <h3>Grok Imagine UNLOCKED 🤯 Unlimited 15-Second AI Videos in 1080p — FREE</h3>
-        <p>Grok Imagine se bina paise diye unlimited AI videos banao — koi limit nahi, full HD quality. Poora secret trick is video me hai, miss mat karna!</p>
-      </div>
+      <p class="video-title">Unlimited AI Images + 10-Second Videos for FREE 🤯</p>
+      <p class="video-desc">Cinematic AI videos with dialogue, 4K AI images, reference images aur multiple models — sab free me.</p>
     </div>
   </div>
 </section>
 
-<!-- ALL VIDEOS -->
-<section id="videos" style="padding-top:8px">
+<!-- MORE VIDEOS -->
+<section style="padding-top:0">
   <div class="wrap">
     <div class="section-head reveal">
       <p class="kicker">Watch More</p>
-      <h2>Saare <span>Videos</span></h2>
-      <p>Channel ke saare uploads yahin auto-update hote hain — naya video aate hi sabse pehle yahan dikhega.</p>
+      <h2>Popular <span>Tutorials</span></h2>
     </div>
-    <div class="video-shell reveal">
-      <div class="video-frame">
-        <iframe src="https://www.youtube.com/embed/videoseries?list=UUS2dkPW2Hq39Ik_SdsyYpiQ" title="TechnoFormer — All Videos playlist" loading="lazy" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen referrerpolicy="strict-origin-when-cross-origin"></iframe>
+    <div class="grid grid-2">
+      <div class="video-shell reveal">
+        <div class="video-frame">
+          <iframe src="https://www.youtube.com/embed/3dDMkDV-YC8" title="Grok Imagine UNLOCKED" loading="lazy" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+        </div>
+        <p class="video-title">Grok Imagine UNLOCKED 🤯 Unlimited 15-Second AI Videos</p>
+        <p class="video-desc">1080p AI videos free me — secret trick, no clickbait.</p>
       </div>
-      <div class="video-meta">
-        <span class="badge badge-cyan">Auto Updated</span>
-        <h3>TechnoFormer — Complete Video Library</h3>
-        <p>AI tools ke free tricks, gadget reviews, app guides — playlist chalao aur ek ke baad ek saare videos dekho.</p>
+      <div class="video-shell reveal">
+        <div class="video-frame">
+          <iframe src="https://www.youtube.com/embed/UqVNsXC60GQ" title="Muse AI UNLOCKED" loading="lazy" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+        </div>
+        <p class="video-title">Muse AI UNLOCKED 🤯 No Credit Card, Region Block Fix</p>
+        <p class="video-desc">Free tokens, verification issues solved — full method.</p>
       </div>
     </div>
-    <div class="center-btn reveal">
-      <a class="btn btn-cyan" href="https://www.youtube.com/@TechnoFormer/videos" target="_blank" rel="noopener">YouTube Par Saare Videos Dekho →</a>
+    <div style="text-align:center;margin-top:24px">
+      <a class="btn btn-ghost" href="videos.html">All Videos →</a>
     </div>
   </div>
 </section>
 
-<!-- ABOUT -->
-<section id="about" style="padding-top:8px">
-  <div class="wrap about-grid">
-    <div class="about-img reveal">
-      <img src="assets/avatar.jpg" alt="TechnoFormer creator avatar — red-haired anime character in a neon tech studio" />
-    </div>
-    <div class="about-text reveal">
-      <p class="kicker">About The Channel</p>
-      <h2>Meet <span>TechnoFormer</span></h2>
-      <p><strong>TechnoFormer</strong> — AI tools, gadgets, apps aur tech news, sab kuch <strong>FREE me kaise</strong> use karein. Paid tools ke free tricks, honest reviews aur latest tech updates — <strong>Explore • Learn • Stay Ahead.</strong></p>
-      <p>Yahan har video ka ek hi mission hai: mehenga tech sabke liye easy aur free banana. Chahe AI video banana ho, premium app unlock karna ho, ya naya gadget kharidne se pehle sach jaanna ho — sahi guide yahi milega, simple Hinglish me.</p>
-      <div class="about-points">
-        <div class="point"><h3>🤖 AI Tricks</h3><p>Paid AI tools free me use karne ke tested tareeke</p></div>
-        <div class="point"><h3>📱 Gadget Reviews</h3><p>Bina bias ke honest reviews aur buying advice</p></div>
-        <div class="point"><h3>🚀 Latest Apps</h3><p>Hidden gem apps aur websites jo kaam aasan karein</p></div>
-        <div class="point"><h3>📰 Tech News</h3><p>Roz ki badi tech khabrein, short aur simple bhasha me</p></div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- NEWS -->
-<section id="news" style="padding-top:8px">
+<!-- BLOG PREVIEW -->
+<section style="padding-top:0">
   <div class="wrap">
     <div class="section-head reveal">
-      <p class="kicker">October 2026</p>
-      <h2>Latest Tech <span>News</span></h2>
-      <p>Tech duniya ki sabse badi khabrein — card par tap karke poori story source par padho.</p>
+      <p class="kicker">Learn</p>
+      <h2>Latest <span>Articles</span></h2>
+      <p>Detailed guides — free AI tools ko master karo.</p>
     </div>
-    <div class="news-grid">
-      <a class="news-card reveal" href="https://www.malaymail.com/news/tech-gadgets/2026/10/19/faster-and-leaner-deepseek-rolls-out-upgraded-ai-model-after-recent-service-disruptions/239703" target="_blank" rel="noopener">
-        <span class="news-date">Oct 19, 2026</span>
-        <h3>DeepSeek launches faster, leaner AI model V4.1-Flash</h3>
-        <p>DeepSeek ne recent service disruptions ke baad apna upgraded V4.1-Flash model roll out kiya — pehle se faster aur leaner performance ke saath.</p>
-        <span class="news-src">Source: Malay Mail →</span>
-      </a>
-      <a class="news-card reveal" href="https://aisdg.substack.com/p/ai-news-for-october-16-2026" target="_blank" rel="noopener">
-        <span class="news-date">Oct 16, 2026</span>
-        <h3>Google Gemini 4 Argon now available; Meta launches Muse Wonder</h3>
-        <p>Google ka Gemini 4 Argon ab available hai aur Meta ne Muse Wonder launch kiya — October ke sabse bade AI updates ek saath.</p>
-        <span class="news-src">Source: AI SD Newsletter →</span>
-      </a>
-      <a class="news-card reveal" href="https://thursdai.news/releases/2026-10" target="_blank" rel="noopener">
-        <span class="news-date">Oct 2026</span>
-        <h3>Meta releases Muse Spark Open: 816B open-weights AI model</h3>
-        <p>Meta ka naya 816B-parameter open-weights model Muse Spark Open release ho gaya — open AI community ke liye ek bada step.</p>
-        <span class="news-src">Source: ThursdAI →</span>
-      </a>
-      <a class="news-card reveal" href="https://thursdai.news/releases/2026-10" target="_blank" rel="noopener">
-        <span class="news-date">Oct 2026</span>
-        <h3>October 2026 AI releases: OpenAI Dots, Claude Sonnet 5.5 &amp; 81 more</h3>
-        <p>OpenAI Dots aur Claude Sonnet 5.5 samet is October 81 se zyada naye AI releases hue — poori list aur details yahan dekho.</p>
-        <span class="news-src">Source: ThursdAI →</span>
-      </a>
-      <a class="news-card reveal" href="https://timesofindia.indiatimes.com/technology/tech-news/dell-launches-new-tools-to-help-ai-agents-understand-business-data-and-connect-information-across-systems-what-it-means/articleshow/134925118.cms" target="_blank" rel="noopener">
-        <span class="news-date">Oct 13, 2026</span>
-        <h3>Dell launches new tools to help AI agents understand business data</h3>
-        <p>Dell ke naye tools AI agents ko business data samajhne aur alag-alag systems ki information connect karne me madad karenge.</p>
-        <span class="news-src">Source: Times of India →</span>
-      </a>
-      <a class="news-card reveal" href="https://turbo.gadgets360.com/hi/ai/meta-launches-llama-4-to-rival-chatgpt-gemini-scout-maverick-released-behemoth-under-development-news-8106799" target="_blank" rel="noopener">
-        <span class="news-date">Oct 16, 2026</span>
-        <h3>Meta x Apple: Muse Spark model coming to Mac Studio (M5 Ultra)</h3>
-        <p>Meta aur Apple ki badi khabar — Muse Spark model Mac Studio ke M5 Ultra chip par aane wala hai, ChatGPT aur Gemini ko takkar dene.</p>
-        <span class="news-src">Source: Gadgets 360 →</span>
-      </a>
+    <div class="grid grid-3">
+      <article class="card reveal">
+        <span class="tag">AI Video</span>
+        <h3><a href="article-1-grok-imagine.html">Grok Imagine Se Free AI Videos: Poora Guide 2026</a></h3>
+        <p class="meta">Oct 2026 • 5 min read</p>
+        <p>15-second ke cinematic AI videos bilkul free me — step-by-step method, limits aur pro tips.</p>
+        <a class="read-more" href="article-1-grok-imagine.html">Read more →</a>
+      </article>
+      <article class="card reveal">
+        <span class="tag">AI Tools</span>
+        <h3><a href="article-2-claude-ai.html">Muse AI Free Me Kaise Use Karein? Tokens + Verification Fix</a></h3>
+        <p class="meta">Oct 2026 • 6 min read</p>
+        <p>Free tokens, bina credit card account, region block bypass — sab kuch ek jagah.</p>
+        <a class="read-more" href="article-2-claude-ai.html">Read more →</a>
+      </article>
+      <article class="card reveal">
+        <span class="tag">AI Images</span>
+        <h3><a href="article-3-free-ai-images.html">Best Free AI Image Generators 2026 (4K Quality)</a></h3>
+        <p class="meta">Oct 2026 • 5 min read</p>
+        <p>4K AI images free me — top tools, comparison aur kaunsa kab use karein.</p>
+        <a class="read-more" href="article-3-free-ai-images.html">Read more →</a>
+      </article>
     </div>
-    <p class="news-note">News headlines unke original sources se linked hain — poori jaankari ke liye source site par padhein.</p>
+    <div style="text-align:center;margin-top:24px">
+      <a class="btn btn-ghost" href="blog.html">All Articles →</a>
+    </div>
   </div>
 </section>
 
 <!-- CTA -->
-<section class="cta">
-  <div class="wrap reveal">
-    <h2>Tech Me <span>Aage Raho!</span></h2>
-    <p>Har hafte naye AI tricks, free tools aur tech updates. Subscribe karo aur bell icon dabao — koi video miss nahi hoga!</p>
-    <div class="hero-btns">
-      <a class="btn btn-red" href="https://www.youtube.com/@TechnoFormer" target="_blank" rel="noopener">▶ Subscribe — It's FREE</a>
-      <a class="btn btn-ghost" href="https://www.instagram.com/technoformer" target="_blank" rel="noopener">Follow on Instagram</a>
+<section style="padding-top:0">
+  <div class="wrap">
+    <div class="cta-band reveal">
+      <h2>New Tricks <span style="color:var(--cyan)">Har Week</span></h2>
+      <p>YouTube par subscribe karo — paid tools ke free methods, sabse pehle yahin milte hain.</p>
+      <a class="btn btn-red" href="https://www.youtube.com/@TechnoFormer" target="_blank" rel="noopener">▶ Subscribe on YouTube</a>
     </div>
   </div>
 </section>
+</main>
 
-<!-- FOOTER -->
 <footer>
   <div class="wrap">
-    <img src="assets/logo.jpg" alt="TechnoFormer logo" />
-    <div class="f-name">TECHNOFORMER</div>
-    <p>© 2026 TechnoFormer • Explore • Learn • Stay Ahead</p>
-    <p>AI + New Tech + Tech Info — Made for tech lovers, in Hinglish ❤️</p>
-    <div class="social-row">
-      <a href="https://www.youtube.com/@TechnoFormer" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="#ff0033" aria-hidden="true"><path d="M23 7.2s-.22-1.56-.9-2.24c-.86-.9-1.82-.9-2.26-.96C16.7 3.75 12 3.75 12 3.75s-4.7 0-7.84.25c-.44.06-1.4.06-2.26.96C1.22 5.64 1 7.2 1 7.2S.75 9.03.75 10.86v1.71C.75 14.4 1 16.23 1 16.23s.22 1.56.9 2.24c.86.9 1.99.87 2.5 1 1.8.17 7.6.25 7.6.25s4.71 0 7.85-.26c.44-.05 1.4-.05 2.26-.95.68-.68.9-2.25.9-2.25s.25-1.82.25-3.65v-1.71C23.25 9.03 23 7.2 23 7.2ZM9.75 15.02V8.4l6.27 3.32-6.27 3.3Z"/></svg> YouTube</a>
-      <a href="https://www.instagram.com/technoformer" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="#00e5ff" aria-hidden="true"><path d="M12 2.2c3.2 0 3.58.01 4.85.07 3.25.15 4.77 1.7 4.92 4.92.06 1.27.07 1.65.07 4.85s-.01 3.58-.07 4.85c-.15 3.22-1.66 4.77-4.92 4.92-1.27.06-1.64.07-4.85.07s-3.58-.01-4.85-.07c-3.26-.15-4.77-1.7-4.92-4.92C2.21 15.58 2.2 15.2 2.2 12s.01-3.58.07-4.85C2.42 3.93 3.94 2.38 7.15 2.27 8.42 2.21 8.8 2.2 12 2.2Zm0 3.6a6.2 6.2 0 1 0 0 12.4 6.2 6.2 0 0 0 0-12.4Zm0 10.22a4.02 4.02 0 1 1 0-8.04 4.02 4.02 0 0 1 0 8.04Zm6.4-11.85a1.45 1.45 0 1 0 0 2.9 1.45 1.45 0 0 0 0-2.9Z"/></svg> Instagram</a>
-      <a href="https://www.youtube.com/@TechnoFormer/videos" target="_blank" rel="noopener">All Videos →</a>
+    <div class="foot-grid">
+      <div>
+        <div class="foot-brand"><img src="assets/logo.jpg" alt="TechnoFormer" /><span>TECHNO<em>FORMER</em></span></div>
+        <p>Paid tools FREE me kaise? AI tricks, tutorials aur tech news — Explore • Learn • Stay Ahead.</p>
+        <div class="social-row" style="margin-top:14px">
+          <a class="social-btn" href="https://www.youtube.com/@TechnoFormer" target="_blank" rel="noopener">▶ YouTube</a>
+          <a class="social-btn" href="https://www.instagram.com/technoformer/" target="_blank" rel="noopener">📸 Instagram</a>
+          <a class="social-btn" href="https://t.me/Technoformer" target="_blank" rel="noopener">📲 Telegram</a>
+          <a class="social-btn" href="https://whatsapp.com/channel/0029VbDaKFQJZg44Ra0IqL1t" target="_blank" rel="noopener">💬 WhatsApp</a>
+          <a class="social-btn" href="https://pin.it/vz8PMyUvd" target="_blank" rel="noopener">📌 Pinterest</a>
+          <a class="social-btn" href="https://www.facebook.com/" target="_blank" rel="noopener">👍 Facebook</a>
+        </div>
+      </div>
+      <div class="foot-links">
+        <h4>Explore</h4>
+        <a href="index.html">Home</a>
+        <a href="videos.html">Videos</a>
+        <a href="blog.html">Blog</a>
+        <a href="about.html">About</a>
+        <a href="contact.html">Contact</a>
+      </div>
+      <div class="foot-links">
+        <h4>Legal</h4>
+        <a href="privacy.html">Privacy Policy</a>
+        <a href="terms.html">Terms of Service</a>
+        <a href="contact.html">Contact Us</a>
+      </div>
+    </div>
+    <div class="foot-bottom">
+      <span>© <span id="year">2026</span> TechnoFormer. All rights reserved.</span>
+      <span><a href="privacy.html">Privacy</a><a href="terms.html">Terms</a></span>
     </div>
   </div>
 </footer>
-
-
+<script src="main.js"></script>
 </body>
 </html>
