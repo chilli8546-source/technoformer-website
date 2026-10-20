@@ -111,18 +111,25 @@ export default async function handler(req, res) {
   res.setHeader('Access-Control-Allow-Origin', '*');
   res.setHeader('Cache-Control', 's-maxage=3600, stale-while-revalidate');
 
-  const { v: videoId, lang = 'en' } = req.query || {};
+  const { v: videoId, lang = 'en', debug } = req.query || {};
+  const dbg = debug === '1' ? { stages: [] } : null;
+  const stage = (s) => { if (dbg) dbg.stages.push(s); };
   if (!videoId || !/^[\w-]{11}$/.test(videoId)) {
     return res.status(400).json({ ok: false, error: 'Sahi YouTube video ID do.' });
   }
 
   try {
     let info = await getTracksFromWatchPage(videoId);
-    if (!info) info = await getTracksFromInnertube(videoId);
+    stage('watchpage:' + (info ? info.tracks.length + ' tracks' : 'none'));
+    if (!info) {
+      info = await getTracksFromInnertube(videoId);
+      stage('innertube:' + (info ? info.tracks.length + ' tracks' : 'none'));
+    }
     if (!info || !info.tracks.length) {
       return res.status(404).json({
         ok: false,
         error: 'Is video me captions/subtitles nahi mile. Kuch videos me subtitles off hote hain.',
+        ...(dbg ? { debug: dbg.stages } : {}),
       });
     }
 
@@ -137,8 +144,10 @@ export default async function handler(req, res) {
     if (translated) url += `&tlang=${encodeURIComponent(lang)}`;
 
     const capRes = await fetch(url, { headers: { 'User-Agent': UA } });
+    stage('capfetch:' + capRes.status + ' ' + (capRes.headers.get('content-type') || ''));
     if (!capRes.ok) throw new Error('caption fetch failed');
     const capText = await capRes.text();
+    stage('capbytes:' + capText.length);
     let segments = [];
     try { segments = parseJson3(capText); }
     catch {
@@ -147,9 +156,14 @@ export default async function handler(req, res) {
       const xml = await xmlRes.text();
       segments = parseXml(xml);
     }
+    stage('segments:' + segments.length);
 
     if (!segments.length) {
-      return res.status(404).json({ ok: false, error: 'Transcript khaali mila. Dobara try karo.' });
+      return res.status(404).json({
+        ok: false,
+        error: 'Transcript khaali mila. Dobara try karo.',
+        ...(dbg ? { debug: dbg.stages } : {}),
+      });
     }
 
     return res.status(200).json({
