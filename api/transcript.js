@@ -58,7 +58,65 @@ async function getTracksFromWatchPage(videoId) {
   if (!player) return null;
   const title = player?.videoDetails?.title || '';
   const tracks = player?.captions?.playerCaptionsTracklistRenderer?.captionTracks || [];
-  return { title, tracks, cookieHeader };
+  // Also extract the transcript-panel params from ytInitialData (for the panel API)
+  const initialData = extractJson(html, 'var ytInitialData =') || extractJson(html, 'ytInitialData =');
+  let transcriptParams = null;
+  const findParams = (node) => {
+    if (!node || typeof node !== 'object' || transcriptParams) return;
+    if (node.getTranscriptEndpoint && typeof node.getTranscriptEndpoint.params === 'string') {
+      transcriptParams = node.getTranscriptEndpoint.params;
+      return;
+    }
+    for (const k of Object.keys(node)) findParams(node[k]);
+  };
+  if (initialData) findParams(initialData);
+  return { title, tracks, cookieHeader, transcriptParams };
+}
+
+// Transcript via YouTube's own transcript-panel endpoint.
+// The segments come inside the API response, so no IP-locked caption URL is fetched.
+// Key is YouTube's public web client key, provided via env var (never in code).
+async function getTranscriptViaPanel(params, stage) {
+  const key = process.env.YT_PUB_KEY;
+  if (!key) { stage('panel:no-key'); return null; }
+  try {
+    const ctrl = new AbortController();
+    const to = setTimeout(() => ctrl.abort(), 15000);
+    const res = await fetch(`https://www.youtube.com/youtubei/v1/get_transcript?key=${key}`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json', 'User-Agent': UA },
+      body: JSON.stringify({
+        context: { client: { clientName: 'WEB', clientVersion: '2.20241010.01.00', hl: 'en', gl: 'US' } },
+        params,
+      }),
+      signal: ctrl.signal,
+    });
+    clearTimeout(to);
+    stage('panel:http-' + res.status);
+    if (!res.ok) return null;
+    const data = await res.json();
+    const renderer =
+      data?.actions?.[0]?.updateEngagementPanelAction?.content?.transcriptRenderer?.content
+        ?.transcriptSearchPanelRenderer?.body?.transcriptSegmentListRenderer;
+    const initial = renderer?.initialSegments || [];
+    const segs = [];
+    for (const item of initial) {
+      const seg = item?.transcriptSegmentRenderer;
+      if (!seg) continue;
+      const text = (seg.snippet?.runs || []).map((r) => r.text || '').join('').trim();
+      if (!text) continue;
+      segs.push({
+        start: parseInt(seg.startMs || '0', 10) / 1000,
+        dur: (parseInt(seg.endMs || '0', 10) - parseInt(seg.startMs || '0', 10)) / 1000,
+        text: decodeEntities(text),
+      });
+    }
+    stage('panel:segments-' + segs.length);
+    return segs.length ? segs : null;
+  } catch (e) {
+    stage('panel:fail-' + (e.name === 'AbortError' ? 'timeout' : 'err'));
+    return null;
+  }
 }
 
 function parseJson3(json3text) {
@@ -97,6 +155,23 @@ export default async function handler(req, res) {
   try {
     const info = await getTracksFromWatchPage(videoId);
     stage('watchpage:' + (info ? info.tracks.length + ' tracks' : 'none'));
+
+    // METHOD 1: transcript-panel endpoint (segments arrive in the API response)
+    if (info && info.transcriptParams) {
+      const segs = await getTranscriptViaPanel(info.transcriptParams, stage);
+      if (segs && segs.length) {
+        return res.status(200).json({
+          ok: true,
+          videoId,
+          title: info.title || '',
+          lang,
+          translated: false,
+          sourceLang: 'auto',
+          segments: segs,
+        });
+      }
+    }
+
     if (!info || !info.tracks.length) {
       return res.status(404).json({
         ok: false,
@@ -105,6 +180,7 @@ export default async function handler(req, res) {
       });
     }
 
+    // METHOD 2: direct caption URL fetch
     const { title, tracks, cookieHeader } = info;
     // Prefer: exact lang track > English track > first track
     const track =
