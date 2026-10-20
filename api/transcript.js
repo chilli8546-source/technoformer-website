@@ -1,5 +1,6 @@
 // Vercel serverless: /api/transcript?v=VIDEO_ID&lang=hi
-// Tries multiple methods to fetch YouTube captions, returns clean transcript JSON.
+// Fetches YouTube captions via the watch-page player response, returns clean transcript JSON.
+// NOTE: uses only public YouTube pages — no private keys or secrets anywhere.
 
 const UA =
   'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36';
@@ -52,39 +53,6 @@ async function getTracksFromWatchPage(videoId) {
   return { title, tracks };
 }
 
-async function getTracksFromInnertube(videoId) {
-  const clients = [
-    { clientName: 'WEB', clientVersion: '2.20241010.01.00' },
-    { clientName: 'TVHTML5', clientVersion: '7.20241009.18.00' },
-  ];
-  for (const client of clients) {
-    try {
-      const ctrl = new AbortController();
-      const to = setTimeout(() => ctrl.abort(), 12000);
-      const res = await fetch(
-        'https://www.youtube.com/youtubei/v1/player?key=AIzaSyAO_FJ2SlqU8Q4STEHLGCilw_Y9_11qcW8',
-        {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json', 'User-Agent': UA },
-          body: JSON.stringify({
-            videoId,
-            context: { client: { ...client, hl: 'en', gl: 'US' } },
-          }),
-          signal: ctrl.signal,
-        }
-      );
-      clearTimeout(to);
-      if (!res.ok) continue;
-      const data = await res.json();
-      if (data?.playabilityStatus?.status === 'LOGIN_REQUIRED') continue;
-      const tracks = data?.captions?.playerCaptionsTracklistRenderer?.captionTracks || [];
-      const title = data?.videoDetails?.title || '';
-      if (tracks.length) return { title, tracks };
-    } catch { /* try next */ }
-  }
-  return null;
-}
-
 function parseJson3(json3text) {
   const data = JSON.parse(json3text);
   const segs = [];
@@ -119,12 +87,8 @@ export default async function handler(req, res) {
   }
 
   try {
-    let info = await getTracksFromWatchPage(videoId);
+    const info = await getTracksFromWatchPage(videoId);
     stage('watchpage:' + (info ? info.tracks.length + ' tracks' : 'none'));
-    if (!info) {
-      info = await getTracksFromInnertube(videoId);
-      stage('innertube:' + (info ? info.tracks.length + ' tracks' : 'none'));
-    }
     if (!info || !info.tracks.length) {
       return res.status(404).json({
         ok: false,
@@ -135,33 +99,42 @@ export default async function handler(req, res) {
 
     const { title, tracks } = info;
     // Prefer: exact lang track > English track > first track
-    let track =
+    const track =
       tracks.find((t) => t.languageCode === lang) ||
       tracks.find((t) => t.languageCode === 'en') ||
       tracks[0];
-    let url = track.baseUrl + '&fmt=json3';
     const translated = track.languageCode !== lang;
-    if (translated) url += `&tlang=${encodeURIComponent(lang)}`;
 
-    const capRes = await fetch(url, { headers: { 'User-Agent': UA } });
-    stage('capfetch:' + capRes.status + ' ' + (capRes.headers.get('content-type') || ''));
-    if (!capRes.ok) throw new Error('caption fetch failed');
-    const capText = await capRes.text();
-    stage('capbytes:' + capText.length);
-    let segments = [];
-    try { segments = parseJson3(capText); }
-    catch {
-      // fallback: try XML
-      const xmlRes = await fetch(url.replace('&fmt=json3', ''), { headers: { 'User-Agent': UA } });
-      const xml = await xmlRes.text();
-      segments = parseXml(xml);
+    // Try caption formats in order: raw XML (as-is), then json3, then vtt
+    const variants = [
+      track.baseUrl,
+      track.baseUrl + '&fmt=json3',
+      track.baseUrl + '&fmt=vtt',
+    ];
+    if (translated) {
+      variants.unshift(track.baseUrl + `&tlang=${encodeURIComponent(lang)}`);
     }
-    stage('segments:' + segments.length);
+
+    let segments = [];
+    for (const url of variants) {
+      try {
+        const capRes = await fetch(url, { headers: { 'User-Agent': UA } });
+        stage('capfetch:' + capRes.status + ' ' + (capRes.headers.get('content-type') || ''));
+        if (!capRes.ok) continue;
+        const capText = await capRes.text();
+        stage('capbytes:' + capText.length);
+        if (!capText || capText.length < 50) continue;
+        try { segments = parseJson3(capText); }
+        catch { segments = parseXml(capText); }
+        stage('segments:' + segments.length);
+        if (segments.length) break;
+      } catch { /* try next variant */ }
+    }
 
     if (!segments.length) {
       return res.status(404).json({
         ok: false,
-        error: 'Transcript khaali mila. Dobara try karo.',
+        error: 'Transcript nahi nikal paya. Kuch videos ke captions block hote hain.',
         ...(dbg ? { debug: dbg.stages } : {}),
       });
     }
