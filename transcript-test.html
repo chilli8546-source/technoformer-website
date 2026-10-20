@@ -1,0 +1,208 @@
+<!doctype html>
+<html lang="hi">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+<meta name="color-scheme" content="dark" />
+<title>YouTube Transcript Tool (TEST) – TechnoFormer</title>
+<meta name="robots" content="noindex, nofollow" />
+<link rel="icon" type="image/jpeg" href="assets/logo.jpg" />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link href="https://fonts.googleapis.com/css2?family=Oxanium:wght@500;600;700;800&family=Hind:wght@400;500;600;700&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="styles.css" />
+<style>
+.tool-box{max-width:720px;margin:0 auto}
+.tool-card{background:var(--card);border:1px solid var(--border-soft);border-radius:var(--radius);padding:24px;margin-bottom:20px}
+.tool-card label{display:block;font-weight:600;margin:14px 0 6px;color:var(--muted)}
+.tool-card input[type=text],.tool-card select{width:100%;padding:13px 16px;border-radius:12px;border:1px solid var(--border-soft);background:rgba(255,255,255,.05);color:var(--text);font-size:16px;font-family:inherit}
+.tool-card select option{background:#0a1a30}
+.row2{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+@media(max-width:600px){.row2{grid-template-columns:1fr}}
+#result{white-space:pre-wrap;background:rgba(0,0,0,.35);border:1px solid var(--border-soft);border-radius:12px;padding:18px;max-height:420px;overflow-y:auto;font-size:15px;line-height:1.8;display:none}
+#result .ts{color:var(--cyan);font-weight:600}
+.status{margin-top:12px;color:var(--muted);font-size:15px}
+.status.err{color:#ff6b6b}
+.btn-row{display:flex;gap:10px;flex-wrap:wrap;margin-top:14px}
+.badge{display:inline-block;background:var(--cyan-soft);color:var(--cyan);font-size:12px;font-weight:700;padding:4px 12px;border-radius:999px;letter-spacing:.08em;margin-bottom:10px}
+</style>
+</head>
+<body>
+<nav class="nav">
+  <div class="wrap nav-in">
+    <a class="brand" href="index.html"><img src="assets/logo.jpg" alt="TechnoFormer logo" /><span class="brand-name">TECHNO<em>FORMER</em></span></a>
+    <div class="nav-links">
+      <a href="index.html">Home</a><a href="videos.html">Videos</a><a href="blog.html">Blog</a><a href="downloads.html">Useful Free Tools</a><a href="websites.html">Useful Free Websites</a><a href="about.html">About</a><a href="contact.html">Contact</a>
+    </div>
+    <a class="nav-cta" href="https://www.youtube.com/@TechnoFormer" target="_blank" rel="noopener">▶ Subscribe</a>
+    <button class="hamburger" id="navToggle" aria-label="Menu">☰</button>
+  </div>
+  <div class="wrap mobile-menu" id="mobileMenu">
+    <a href="index.html">Home</a><a href="videos.html">Videos</a><a href="blog.html">Blog</a><a href="downloads.html">Useful Free Tools</a><a href="websites.html">Useful Free Websites</a><a href="about.html">About</a><a href="contact.html">Contact</a>
+  </div>
+</nav>
+
+<main>
+<section>
+  <div class="wrap tool-box">
+    <div class="section-head reveal" style="text-align:center">
+      <span class="badge">🧪 TEST VERSION</span>
+      <p class="kicker">Apna Tool</p>
+      <h2>YouTube <span>Transcript</span> Tool</h2>
+      <p style="margin-inline:auto">Kisi bhi YouTube video ka link daalo, language chuno — poora transcript mil jayega. Bilkul free!</p>
+    </div>
+
+    <div class="tool-card reveal">
+      <label for="yturl">🔗 YouTube Video Link</label>
+      <input type="text" id="yturl" placeholder="https://www.youtube.com/watch?v=..." autocomplete="off" />
+
+      <div class="row2">
+        <div>
+          <label for="lang">🌐 Language</label>
+          <select id="lang">
+            <option value="hi">Hindi</option>
+            <option value="en">English</option>
+            <option value="ur">Urdu</option>
+            <option value="pa">Punjabi</option>
+            <option value="bn">Bengali</option>
+            <option value="mr">Marathi</option>
+            <option value="ta">Tamil</option>
+            <option value="te">Telugu</option>
+            <option value="gu">Gujarati</option>
+            <option value="kn">Kannada</option>
+            <option value="ml">Malayalam</option>
+            <option value="es">Spanish</option>
+            <option value="fr">French</option>
+            <option value="de">German</option>
+            <option value="ar">Arabic</option>
+            <option value="pt">Portuguese</option>
+            <option value="ru">Russian</option>
+            <option value="ja">Japanese</option>
+            <option value="ko">Korean</option>
+            <option value="id">Indonesian</option>
+          </select>
+        </div>
+        <div>
+          <label for="tsmode">⏱️ Timestamps</label>
+          <select id="tsmode">
+            <option value="yes">Dikhao</option>
+            <option value="no">Chhupao</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="btn-row">
+        <button class="btn btn-cyan" id="goBtn" style="flex:1;justify-content:center">📝 Transcript Nikalo</button>
+      </div>
+      <p class="status" id="status"></p>
+    </div>
+
+    <div class="tool-card reveal" id="outCard" style="display:none">
+      <h3 id="vidTitle" style="font-size:18px;margin-bottom:6px"></h3>
+      <p class="status" id="srcInfo" style="margin-top:0"></p>
+      <div id="result"></div>
+      <div class="btn-row">
+        <button class="btn btn-cyan" id="copyBtn">📋 Copy Karo</button>
+        <button class="btn" id="dlBtn" style="background:rgba(255,255,255,.08);border-color:var(--border-soft)">⬇️ .txt Download</button>
+      </div>
+    </div>
+  </div>
+</section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <div class="foot-grid">
+      <div>
+        <div class="foot-brand"><img src="assets/logo.jpg" alt="TechnoFormer" /><span>TECHNO<em>FORMER</em></span></div>
+        <p>Latest AI, helpful tools & websites, gadgets aur tech knowledge — bina time waste kiye, sahi info, simple Hinglish me!</p>
+        <div class="social-row" style="margin-top:14px">
+          <a class="social-btn" href="https://www.youtube.com/@TechnoFormer" target="_blank" rel="noopener">▶ YouTube</a>
+          <a class="social-btn" href="https://www.instagram.com/technoformer/" target="_blank" rel="noopener">📸 Instagram</a>
+          <a class="social-btn" href="https://t.me/Technoformer" target="_blank" rel="noopener">📲 Telegram</a>
+          <a class="social-btn" href="https://whatsapp.com/channel/0029VbDaKFQJZg44Ra0IqL1t" target="_blank" rel="noopener">💬 WhatsApp</a>
+          <a class="social-btn" href="https://pin.it/vz8PMyUvd" target="_blank" rel="noopener">📌 Pinterest</a>
+        </div>
+      </div>
+      <div class="foot-links"><h4>Explore</h4><a href="index.html">Home</a><a href="videos.html">Videos</a><a href="blog.html">Blog</a><a href="downloads.html">Useful Free Tools</a><a href="websites.html">Useful Free Websites</a><a href="about.html">About</a><a href="contact.html">Contact</a></div>
+      <div class="foot-links"><h4>Legal</h4><a href="privacy.html">Privacy Policy</a><a href="terms.html">Terms of Service</a></div>
+    </div>
+    <div class="foot-bottom"><span>© <span id="year">2026</span> TechnoFormer. All rights reserved.</span><span><a href="privacy.html">Privacy</a><a href="terms.html">Terms</a></span></div>
+  </div>
+</footer>
+<script src="main.js"></script>
+<script>
+const $ = (id) => document.getElementById(id);
+let lastData = null;
+
+function extractId(url) {
+  url = (url || '').trim();
+  if (/^[\w-]{11}$/.test(url)) return url;
+  const m = url.match(/(?:youtube\.com\/(?:watch\?[^#]*v=|shorts\/|embed\/|live\/)|youtu\.be\/)([\w-]{11})/);
+  return m ? m[1] : null;
+}
+function fmtTime(s) {
+  s = Math.floor(s);
+  const h = Math.floor(s / 3600), m = Math.floor((s % 3600) / 60), ss = s % 60;
+  const mm = String(m).padStart(2, '0'), sss = String(ss).padStart(2, '0');
+  return h > 0 ? `${h}:${mm}:${sss}` : `${mm}:${sss}`;
+}
+
+$('goBtn').addEventListener('click', async () => {
+  const id = extractId($('yturl').value);
+  const lang = $('lang').value;
+  const showTs = $('tsmode').value === 'yes';
+  const st = $('status');
+  if (!id) { st.textContent = '❌ Sahi YouTube link daalo bhai!'; st.className = 'status err'; return; }
+  st.textContent = '⏳ Transcript la raha hoon...';
+  st.className = 'status';
+  $('goBtn').disabled = true;
+  try {
+    const r = await fetch(`/api/transcript?v=${id}&lang=${lang}`);
+    const d = await r.json();
+    if (!d.ok) throw new Error(d.error || 'Nahi mila');
+    lastData = d;
+    $('vidTitle').textContent = '🎬 ' + (d.title || 'Video');
+    $('srcInfo').textContent = d.translated
+      ? `🌐 Auto-translate: ${d.sourceLang} → ${d.lang}`
+      : `🌐 Original subtitles (${d.sourceLang})`;
+    $('result').innerHTML = d.segments.map(s =>
+      showTs ? `<span class="ts">[${fmtTime(s.start)}]</span> ${escapeHtml(s.text)}` : escapeHtml(s.text)
+    ).join(showTs ? '<br>' : ' ');
+    $('result').style.display = 'block';
+    $('outCard').style.display = 'block';
+    st.textContent = `✅ Ho gaya! ${d.segments.length} lines mili.`;
+    $('outCard').scrollIntoView({ behavior: 'smooth', block: 'start' });
+  } catch (e) {
+    st.textContent = '❌ ' + e.message;
+    st.className = 'status err';
+  } finally {
+    $('goBtn').disabled = false;
+  }
+});
+
+function escapeHtml(s) {
+  return s.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+}
+function plainText() {
+  if (!lastData) return '';
+  const showTs = $('tsmode').value === 'yes';
+  return lastData.segments.map(s => showTs ? `[${fmtTime(s.start)}] ${s.text}` : s.text).join('\n');
+}
+$('copyBtn').addEventListener('click', async () => {
+  try {
+    await navigator.clipboard.writeText(plainText());
+    $('copyBtn').textContent = '✅ Copy Ho Gaya!';
+    setTimeout(() => $('copyBtn').textContent = '📋 Copy Karo', 2000);
+  } catch { alert('Copy nahi hua — manually select karke copy karo.'); }
+});
+$('dlBtn').addEventListener('click', () => {
+  const blob = new Blob([plainText()], { type: 'text/plain;charset=utf-8' });
+  const a = document.createElement('a');
+  a.href = URL.createObjectURL(blob);
+  a.download = `transcript-${lastData ? lastData.videoId : 'video'}.txt`;
+  a.click();
+  URL.revokeObjectURL(a.href);
+});
+</script>
+</body>
+</html>
