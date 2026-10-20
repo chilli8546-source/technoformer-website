@@ -61,15 +61,19 @@ async function getTracksFromWatchPage(videoId) {
   // Also extract the transcript-panel params from ytInitialData (for the panel API)
   const initialData = extractJson(html, 'var ytInitialData =') || extractJson(html, 'ytInitialData =');
   let transcriptParams = null;
-  const findParams = (node) => {
-    if (!node || typeof node !== 'object' || transcriptParams) return;
-    if (node.getTranscriptEndpoint && typeof node.getTranscriptEndpoint.params === 'string') {
-      transcriptParams = node.getTranscriptEndpoint.params;
-      return;
+  // Path-aware: engagementPanels -> panelIdentifier == engagement-panel-searchable-transcript
+  try {
+    const panels = initialData?.engagementPanels || [];
+    for (const p of panels) {
+      const sec = p?.engagementPanelSectionListRenderer;
+      if (sec?.panelIdentifier === 'engagement-panel-searchable-transcript') {
+        const content = sec?.content;
+        const str = JSON.stringify(content);
+        const m = str.match(/"getTranscriptEndpoint"\s*:\s*\{"params"\s*:\s*"([^"]+)"/);
+        if (m) { transcriptParams = m[1]; break; }
+      }
     }
-    for (const k of Object.keys(node)) findParams(node[k]);
-  };
-  if (initialData) findParams(initialData);
+  } catch { /* fall through */ }
   return { title, tracks, cookieHeader, transcriptParams };
 }
 
@@ -84,9 +88,24 @@ async function getTranscriptViaPanel(params, stage) {
     const to = setTimeout(() => ctrl.abort(), 15000);
     const res = await fetch(`https://www.youtube.com/youtubei/v1/get_transcript?key=${key}`, {
       method: 'POST',
-      headers: { 'Content-Type': 'application/json', 'User-Agent': UA },
+      headers: {
+        'Content-Type': 'application/json',
+        'User-Agent': UA,
+        'X-YouTube-Client-Name': '1',
+        'X-YouTube-Client-Version': '2.20241010.01.00',
+        'Origin': 'https://www.youtube.com',
+        'Referer': 'https://www.youtube.com/',
+      },
       body: JSON.stringify({
-        context: { client: { clientName: 'WEB', clientVersion: '2.20241010.01.00', hl: 'en', gl: 'US' } },
+        context: {
+          client: {
+            clientName: 'WEB',
+            clientVersion: '2.20241010.01.00',
+            hl: 'en',
+            gl: 'US',
+            visitorData: '',
+          },
+        },
         params,
       }),
       signal: ctrl.signal,
