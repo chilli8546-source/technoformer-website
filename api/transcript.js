@@ -43,6 +43,14 @@ async function getTracksFromWatchPage(videoId) {
     headers: { 'User-Agent': UA, 'Accept-Language': 'en-US,en;q=0.9' },
   });
   if (!res.ok) return null;
+  // Capture cookies — caption requests often need the same session
+  const cookies = [];
+  const rawSet = res.headers.getSetCookie ? res.headers.getSetCookie() : [];
+  for (const c of rawSet) {
+    const pair = c.split(';')[0];
+    if (pair && pair.includes('=')) cookies.push(pair);
+  }
+  const cookieHeader = cookies.join('; ');
   const html = await res.text();
   if (html.includes('google.com/sorry')) return null; // bot check
   const player = extractJson(html, 'ytInitialPlayerResponse =') ||
@@ -50,7 +58,7 @@ async function getTracksFromWatchPage(videoId) {
   if (!player) return null;
   const title = player?.videoDetails?.title || '';
   const tracks = player?.captions?.playerCaptionsTracklistRenderer?.captionTracks || [];
-  return { title, tracks };
+  return { title, tracks, cookieHeader };
 }
 
 function parseJson3(json3text) {
@@ -97,13 +105,20 @@ export default async function handler(req, res) {
       });
     }
 
-    const { title, tracks } = info;
+    const { title, tracks, cookieHeader } = info;
     // Prefer: exact lang track > English track > first track
     const track =
       tracks.find((t) => t.languageCode === lang) ||
       tracks.find((t) => t.languageCode === 'en') ||
       tracks[0];
     const translated = track.languageCode !== lang;
+
+    const capHeaders = {
+      'User-Agent': UA,
+      'Referer': `https://www.youtube.com/watch?v=${videoId}`,
+      'Accept-Language': 'en-US,en;q=0.9',
+    };
+    if (cookieHeader) capHeaders['Cookie'] = cookieHeader;
 
     // Try caption formats in order: raw XML (as-is), then json3, then vtt
     const variants = [
@@ -118,7 +133,7 @@ export default async function handler(req, res) {
     let segments = [];
     for (const url of variants) {
       try {
-        const capRes = await fetch(url, { headers: { 'User-Agent': UA } });
+        const capRes = await fetch(url, { headers: capHeaders });
         stage('capfetch:' + capRes.status + ' ' + (capRes.headers.get('content-type') || ''));
         if (!capRes.ok) continue;
         const capText = await capRes.text();
