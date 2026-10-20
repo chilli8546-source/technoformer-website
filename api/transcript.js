@@ -112,7 +112,11 @@ async function getTranscriptViaPanel(params, stage) {
     });
     clearTimeout(to);
     stage('panel:http-' + res.status);
-    if (!res.ok) return null;
+    if (!res.ok) {
+      const errText = await res.text().catch(() => '');
+      if (errText) stage('panel:err-' + errText.replace(/\s+/g, ' ').slice(0, 160));
+      return null;
+    }
     const data = await res.json();
     const renderer =
       data?.actions?.[0]?.updateEngagementPanelAction?.content?.transcriptRenderer?.content
